@@ -8,7 +8,10 @@
 		
 		public function IntroState() 
 		{
-			_captionChain = new CaptionChain(new Array(new Caption("Hello World", 10, 10, 1.5)));
+			_captionChain = new CaptionChain(new Array(
+				new Caption("Hello World", 10, 10, 1.0, 1.5, 1.0),
+				new Caption("This is BREGMA", 10, 10, 1.0, 1.5, 1.0)
+			));
 			
 			add(_captionChain);
 		}

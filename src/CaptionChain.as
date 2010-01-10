@@ -11,6 +11,11 @@
 		public function CaptionChain(captions : Array) 
 		{
 			_captions = captions;
+			
+			for (var i:int = 0; i < _captions.length; i++) 
+			{
+				FlxG.state.add(_captions[i]);
+			}
 		}	
 		
 		public function get state() : String
@@ -30,8 +35,7 @@
 			var caption : Caption = Caption(_captions[_currentCaption]);
 			
 			if (caption.state == 'display') {
-				caption.text.render();
-				caption.on_update();
+				caption.active = true;
 			} else if (caption.state == 'done') {
 				_currentCaption++;
 			}

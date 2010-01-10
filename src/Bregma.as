@@ -8,7 +8,7 @@
 	{
 		public function Bregma()
 		{
-			super(384, 240, MenuState, 2);
+			super(384, 240, IntroState, 2);
 		}
 	}
 

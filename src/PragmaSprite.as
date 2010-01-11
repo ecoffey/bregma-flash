@@ -41,10 +41,10 @@
 			var nx : Number = dx / l;
 			var ny : Number = dy / l;
 			
-			if (nx > ny) {
+			if (Math.abs(nx) > Math.abs(ny)) {
 				return (nx > 0) ? 'right' : 'left';
 			} else {
-				return (ny > 0) ? 'up' : 'down';
+				return (ny > 0) ? 'down' : 'up';
 			}
 		}
 		

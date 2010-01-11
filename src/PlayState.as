@@ -17,6 +17,9 @@ package
 			var myMap2 : FlxTilemap = new FlxTilemap();
 			myMap2.loadMap(new data_map2, data_tiles, 20, 20);
 			add(myMap2);
+			
+			var pragma : PragmaSprite = new PragmaSprite();
+			add(pragma);
 		}
 	}
 }

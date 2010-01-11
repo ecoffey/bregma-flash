@@ -6,6 +6,7 @@
 	
 	public class Bregma extends FlxGame
 	{
+		[Embed(source = "../content/ui/cursor.png", mimeType = "image/png")] public static var Cursor:Class;
 		public function Bregma()
 		{
 			super(384, 240, IntroState, 2);

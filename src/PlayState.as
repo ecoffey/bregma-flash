@@ -23,6 +23,9 @@ package
 			
 			var pragma : PragmaSprite = new PragmaSprite(50, 50);
 			add(pragma);
+			
+			
+			FlxG.showCursor(Bregma.Cursor);
 		}
 	}
 }

@@ -24,6 +24,8 @@ package
 			var pragma : PragmaSprite = new PragmaSprite(50, 50);
 			add(pragma);
 			
+			var hose : Hose = new Hose(pragma);
+			add(hose);
 			
 			FlxG.showCursor(Bregma.Cursor);
 		}

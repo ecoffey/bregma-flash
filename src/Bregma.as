@@ -9,6 +9,8 @@
 		public function Bregma()
 		{
 			super(384, 240, IntroState, 2);
+			this.showLogo = false;
+			this.useDefaultHotKeys = true;
 		}
 	}
 

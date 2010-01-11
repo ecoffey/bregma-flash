@@ -22,7 +22,7 @@
 		
 		override public function update():void 
 		{
-			var animation : String = "walk-" + look_direction2();
+			var animation : String = "walk-" + look_direction();
 			
 			trace(animation);
 			
@@ -31,7 +31,7 @@
 			super.update();
 		}
 		
-		private function look_direction2() : String
+		private function look_direction() : String
 		{
 			var dx : Number = FlxG.mouse.x - this.x;
 			var dy : Number = FlxG.mouse.y - this.y;
@@ -46,34 +46,6 @@
 			} else {
 				return (ny > 0) ? 'down' : 'up';
 			}
-		}
-		
-		private function look_direction() : String
-		{
-			var dx : Number = FlxG.mouse.x - this.x;
-			var dy : Number = FlxG.mouse.y - this.y;
-			
-			var l : Number = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-			
-			var nx : Number = dx / l;
-			var ny : Number = dy / l;
-			
-			var theta : Number = (Math.atan2(ny, nx) * 180.0) / Math.PI;
-			var index : int = int(((theta + 45.0) / 90.0) % 4);
-			
-			trace(theta);
-			
-			trace(index);
-			
-			switch (index) 
-			{
-				case 0: return "right"; break;
-				case 1: return "down"; break;
-				case 2: return "left"; break;
-				case -1: return "up"; break;
-			}
-			
-			return "";
 		}
 	}
 }

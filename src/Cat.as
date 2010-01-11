@@ -1,5 +1,6 @@
 ﻿package  
 {
+	import flash.geom.Point;
 	import org.flixel.*;
 	
 	/**
@@ -11,11 +12,9 @@
 		[Embed(source="../content/sprites/kid2_bw.png", mimeType="image/png")]
 		public static var CatImage:Class;
 		
-		protected var DecisionCountdown : Number = 2;
-		protected var WalkCountdown : Number = 2;
-		protected var Decision : String;
-		protected var vx : Number;
-		protected var vy : Number;
+		protected var decisionCountdown : Number = 3;
+		protected var walkCountdown : Number = 1.5;
+		protected var decision : String;
 
 		
 		public function Cat(x:Number, y:Number)
@@ -26,22 +25,50 @@
 			this.addAnimation("walk-right", [4, 3, 4, 5], 6, true);
 			this.addAnimation("walk-down", [7, 6, 7, 8], 6, true);
 			this.addAnimation("walk-left", [10, 9, 10, 11], 6, true);
-			this.specificFrame(6);
+			this.offset.x = 12;
+			this.offset.y = 16;
+			this.specificFrame(7);
 		}
 		
 		public override function update() : void
 		{
-			if (Decision == null)
+			super.update();
+			
+			decisionCountdown -= FlxG.elapsed;
+			walkCountdown -= FlxG.elapsed;
+			if (decisionCountdown <= 0 )
 			{
-				switch(Decision)
+				decisionCountdown = 3;
+				walkCountdown = 1.5;
+				velocity = new Point(0, 0);
+				var i : int = int(Math.random() * 4);
+				if (i == 0)
 				{
-					case "walk-left":
-						this.play("walk-left");
-						break;
-					case "walk-right":
-						this.play("walk-right");
+					velocity.x = -20;
+					this.play("walk-left");
+				}
+				else if (i == 1)
+				{
+					velocity.x = 20;
+					this.play("walk-right");
+				}
+				else if (i == 2)
+				{
+					velocity.y = 20;
+					this.play("walk-down");
+				}
+				else
+				{
+					velocity.y = -20;
+					this.play("walk-up");
 				}
 			}
+			if (walkCountdown < 0)
+			{
+				velocity = new Point(0, 0);
+				this.specificFrame(7);
+			}
+			
 			
 		}
 		

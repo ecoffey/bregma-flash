@@ -7,6 +7,9 @@
 	
 	public class PragmaSprite extends FlxSprite
 	{	
+		protected static var SPEED : Number = 30;
+		protected static var ANIMATION_SPEED : Number = 6;
+		
 		[Embed(source="../content/sprites/bregmommy_bw.png")]
 		protected var PragmaImage: Class;
 		
@@ -19,10 +22,10 @@
 			
 			loadGraphic(PragmaImage, true, false, 24, 32, false);
 			
-			addAnimation("walk-up", [1, 0, 1, 2], 3, true); 
-			addAnimation("walk-right", [4, 3, 4, 5], 3, true);
-			addAnimation("walk-down", [7, 6, 7, 8], 3, true);
-			addAnimation("walk-left", [10, 9, 10, 11], 3, true);
+			addAnimation("walk-up", [1, 0, 1, 2], ANIMATION_SPEED, true); 
+			addAnimation("walk-right", [4, 3, 4, 5], ANIMATION_SPEED, true);
+			addAnimation("walk-down", [7, 6, 7, 8], ANIMATION_SPEED, true);
+			addAnimation("walk-left", [10, 9, 10, 11], ANIMATION_SPEED, true);
 		
 			addAnimation("idle-up", [1], 1, false);
 			addAnimation("idle-right", [4], 1, false);
@@ -38,16 +41,19 @@
 			velocity = new Point(0, 0);
 			
 			if (FlxG.keys.pressed('W')) {
-				velocity.y -= 20;
+				velocity.y -= SPEED;
 				action = "walk";
-			} else if (FlxG.keys.pressed('S')) {
-				velocity.y += 20;
+			} 
+			if (FlxG.keys.pressed('S')) {
+				velocity.y += SPEED;
 				action = "walk";
-			} else if (FlxG.keys.pressed('A')) {
-				velocity.x -= 20;
+			} 
+			if (FlxG.keys.pressed('A')) {
+				velocity.x -= SPEED;
 				action = "walk";
-			} else if (FlxG.keys.pressed('D')) {
-				velocity.x += 20;
+			} 
+			if (FlxG.keys.pressed('D')) {
+				velocity.x += SPEED;
 				action = "walk";
 			}
 			

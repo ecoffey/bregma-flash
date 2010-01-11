@@ -8,10 +8,10 @@
 		
 		public function IntroState() 
 		{
-			_captionChain = new CaptionChain(new Array(
+			_captionChain = new CaptionChain([
 				new Caption("Hello World", FlxG.width/2-50, FlxG.height/2-10, 1.0, 1.5, 1.0),
 				new Caption("This is BREGMA", FlxG.width/2-50,  FlxG.height/2 - 10, 1.0, 1.5, 1.0)
-			));
+			]);
 			
 			add(_captionChain);
 			FlxG.playMusic(Music.Prelude);
@@ -21,11 +21,8 @@
 		{
 			super.update();
 			
-			if (FlxG.mouse.justPressed()) {
-				FlxG.switchState(PlayState);
-			}
-			
-			if (_captionChain.state == 'done') {
+			if (FlxG.mouse.justPressed() ||
+				_captionChain.state == 'done') {
 				FlxG.switchState(PlayState);
 			}
 		}

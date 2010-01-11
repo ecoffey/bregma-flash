@@ -20,6 +20,9 @@ package
 			
 			var cat : Cat = new Cat(FlxG.width / 2, FlxG.height / 2);
 			add(cat);
+			
+			var pragma : PragmaSprite = new PragmaSprite();
+			add(pragma);
 		}
 	}
 }

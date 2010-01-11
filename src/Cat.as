@@ -11,9 +11,9 @@
 		[Embed(source="../content/sprites/kid2_bw.png", mimeType="image/png")]
 		public static var CatImage:Class;
 		
-		protected var DecisionCountdown = 2;
-		protected var WalkCountdown = 2;
-		protected var Decision;
+		protected var DecisionCountdown : Number = 2;
+		protected var WalkCountdown : Number = 2;
+		protected var Decision : String;
 		protected var vx : Number;
 		protected var vy : Number;
 

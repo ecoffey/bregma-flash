@@ -11,7 +11,11 @@ package
 		[Embed(source = "../content/level1/level1.txt", mimeType = "application/octet-stream")] public static var data_map:Class;
 		[Embed(source = "../content/level1/sheet.png", mimeType = "image/png")] public static var data_tiles:Class;
 		
+		
+		[Embed(source = "../content/level1/lighting.png", mimeType = "image/png")] public static var lighting_image:Class;
+		
 		public var dynamicLayer:FlxLayer = new FlxLayer();
+		public var lighting:FlxSprite;
 		
 		public function PlayState()
 		{
@@ -21,6 +25,9 @@ package
 			//var myMap2 : FlxTilemap = new FlxTilemap();
 			//myMap2.loadMap(new data_map2, data_tiles, 20, 20);
 			//add(myMap2);
+			
+			lighting = new FlxSprite(0, 0, lighting_image);
+			lighting.blend = "multiply";
 			
 			var pragma : PragmaSprite = new PragmaSprite(50, 50);
 			var hose : Hose = new Hose(pragma);
@@ -46,7 +53,7 @@ package
 		override public function postProcess():void 
 		{
 			super.postProcess();
-			
+			screen.draw(lighting, 0, 0);
 		}
 		
 	}

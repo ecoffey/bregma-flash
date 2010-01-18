@@ -4,31 +4,51 @@ package
 
 	public class PlayState extends FlxState
 	{
-		[Embed(source = "../content/level0/layer0.txt", mimeType = "application/octet-stream")] public static var data_map:Class;
+		/*[Embed(source = "../content/level0/layer0.txt", mimeType = "application/octet-stream")] public static var data_map:Class;
 		[Embed(source = "../content/level0/layer1.txt", mimeType = "application/octet-stream")] public static var data_map2:Class;
-		[Embed(source = "../content/level0/sheet.png", mimeType = "image/png")] public static var data_tiles:Class;
+		[Embed(source = "../content/level0/sheet.png", mimeType = "image/png")] public static var data_tiles:Class;*/
+		
+		[Embed(source = "../content/level1/level1.txt", mimeType = "application/octet-stream")] public static var data_map:Class;
+		[Embed(source = "../content/level1/sheet.png", mimeType = "image/png")] public static var data_tiles:Class;
+		
+		public var dynamicLayer:FlxLayer = new FlxLayer();
 		
 		public function PlayState()
 		{
-			add(new FlxText(0, 0, 100, "INSERT GAME HERE"));
 			var myMap : FlxTilemap = new FlxTilemap();
-			myMap.loadMap(new data_map, data_tiles, 20, 20);
+			myMap.loadMap(new data_map, data_tiles, 16, 16);
 			add(myMap);
-			var myMap2 : FlxTilemap = new FlxTilemap();
-			myMap2.loadMap(new data_map2, data_tiles, 20, 20);
-			add(myMap2);
-			
-			var cat : Cat = new Cat(FlxG.width / 2, FlxG.height / 2);
-			add(cat);
+			//var myMap2 : FlxTilemap = new FlxTilemap();
+			//myMap2.loadMap(new data_map2, data_tiles, 20, 20);
+			//add(myMap2);
 			
 			var pragma : PragmaSprite = new PragmaSprite(50, 50);
-			add(pragma);
-			
 			var hose : Hose = new Hose(pragma);
-			add(hose);
+		
+			add(dynamicLayer);
+			dynamicLayer.add(pragma);
+			dynamicLayer.add(hose);
+			
+			for (var i:int = 0; i < 5; i++)
+			{
+				dynamicLayer.add(new Cat(FlxG.width * Math.random(), FlxG.height * Math.random()));
+			}
 			
 			FlxG.showCursor(Bregma.Cursor);
 		}
+		
+		override public function update():void 
+		{
+			super.update();
+			dynamicLayer.children().sortOn("y");
+		}
+		
+		override public function postProcess():void 
+		{
+			super.postProcess();
+			
+		}
+		
 	}
 }
 

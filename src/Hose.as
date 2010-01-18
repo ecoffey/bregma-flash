@@ -8,19 +8,21 @@
 	
 	public class Hose extends FlxCore
 	{	
-		private var _node_distance : Number = 10;
-		private var _start_x : Number = -1000;
-		private var _start_y : Number = 300;
+		private var _node_distance : Number = 5;
+		private var _start_x : Number = -500;
+		private var _start_y : Number = 150;
 		
 		private var _pragma : PragmaSprite;
 		private var _points : Array;
+		
+		public const OFFSET_Y : Number = 8;
 		
 		public function Hose(pragma : PragmaSprite) 
 		{
 			_pragma = pragma;
 			
 			_points = new Array();
-			for (var i:int = _start_x; i < 300; i += _node_distance) 
+			for (var i:int = _start_x; i <100; i += _node_distance) 
 			{
 				_points.push(new Point(i, _start_y));
 			}
@@ -32,7 +34,7 @@
 			var my : Number = FlxG.mouse.y;
 			
 			var mdx : Number = mx - _pragma.x;
-			var mdy : Number = my - _pragma.y;
+			var mdy : Number = my - _pragma.y-OFFSET_Y;
 			
 			var d : Number = Math.sqrt(Math.pow(mdx, 2) + Math.pow(mdy, 2));
 			
@@ -40,8 +42,8 @@
 			var mny : Number = (mdy / d) * _node_distance;
 			
 			_points[0] = new Point(_start_x, _start_y);
-			_points[_points.length - 1] = new Point(_pragma.x + mnx, _pragma.y + mny);
-			_points[_points.length - 2] = new Point(_pragma.x, _pragma.y);
+			_points[_points.length - 1] = new Point(_pragma.x + mnx, _pragma.y-OFFSET_Y + mny);
+			_points[_points.length - 2] = new Point(_pragma.x, _pragma.y-OFFSET_Y);
 			
 			for (var i:int = 1; i < _points.length - 1; i++) 
 			{
@@ -86,7 +88,7 @@
 		{
 			var line : Shape = new Shape();
             
-			line.graphics.lineStyle(1, 0x000099);
+			line.graphics.lineStyle(1, 0x00AA11);
             line.graphics.moveTo(x1, y1);
             line.graphics.lineTo(x2, y2);
 			

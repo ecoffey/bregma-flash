@@ -9,7 +9,7 @@
 	 */
 	public class Cat extends FlxSprite
 	{
-		[Embed(source="../content/sprites/kid2_bw.png", mimeType="image/png")]
+		[Embed(source="../content/sprites/cat.png", mimeType="image/png")]
 		public static var CatImage:Class;
 		
 		protected var decisionCountdown : Number = 3;
@@ -20,7 +20,7 @@
 		public function Cat(x:Number, y:Number)
 		{
 			super(x, y,  null);
-			this.loadGraphic(CatImage, true, false, 24, 32, false);
+			this.loadGraphic(CatImage, true, false, 12, 16, false);
 			this.addAnimation("walk-up", [1, 0, 1, 2], 6, true); 
 			this.addAnimation("walk-right", [4, 3, 4, 5], 6, true);
 			this.addAnimation("walk-down", [7, 6, 7, 8], 6, true);
@@ -38,8 +38,8 @@
 			walkCountdown -= FlxG.elapsed;
 			if (decisionCountdown <= 0 )
 			{
-				decisionCountdown = 3;
-				walkCountdown = 1.5;
+				decisionCountdown = 3*Math.random();
+				walkCountdown = 1.5*Math.random();
 				velocity = new Point(0, 0);
 				var i : int = int(Math.random() * 4);
 				if (i == 0)

@@ -10,17 +10,17 @@
 		protected static var SPEED : Number = 30;
 		protected static var ANIMATION_SPEED : Number = 6;
 		
-		[Embed(source="../content/sprites/bregmommy_bw.png")]
+		[Embed(source="../content/sprites/pragma_smal.png")]
 		protected var PragmaImage: Class;
 		
 		public function PragmaSprite(x : Number, y : Number) 
 		{
 			super(x, y, null);
 			
-			offset.x = 12;
+			offset.x = 8;
 			offset.y = 16;
 			
-			loadGraphic(PragmaImage, true, false, 24, 32, false);
+			loadGraphic(PragmaImage, true, false, 16, 16, false);
 			
 			addAnimation("walk-up", [1, 0, 1, 2], ANIMATION_SPEED, true); 
 			addAnimation("walk-right", [4, 3, 4, 5], ANIMATION_SPEED, true);

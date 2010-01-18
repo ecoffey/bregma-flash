@@ -1,5 +1,6 @@
 package
 {
+	import flash.net.FileReferenceList;
 	import org.flixel.*;
 
 	public class PlayState extends FlxState
@@ -14,8 +15,11 @@ package
 		
 		[Embed(source = "../content/level1/lighting.png", mimeType = "image/png")] public static var lighting_image:Class;
 		
+		
 		public var dynamicLayer:FlxLayer = new FlxLayer();
 		public var lighting:FlxSprite;
+		
+		public var rain:Array;
 		
 		public function PlayState()
 		{
@@ -25,6 +29,9 @@ package
 			//var myMap2 : FlxTilemap = new FlxTilemap();
 			//myMap2.loadMap(new data_map2, data_tiles, 20, 20);
 			//add(myMap2);
+						
+			rain = new Array();
+			
 			
 			lighting = new FlxSprite(0, 0, lighting_image);
 			lighting.blend = "multiply";
@@ -33,6 +40,7 @@ package
 			var hose : Hose = new Hose(pragma);
 		
 			add(dynamicLayer);
+			add(new Rain());
 			dynamicLayer.add(pragma);
 			dynamicLayer.add(hose);
 			

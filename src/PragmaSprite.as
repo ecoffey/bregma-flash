@@ -7,8 +7,8 @@
 	
 	public class PragmaSprite extends FlxSprite
 	{	
-		protected static var SPEED : Number = 30;
-		protected static var ANIMATION_SPEED : Number = 6;
+		protected static var SPEED : Number = 60;
+		protected static var ANIMATION_SPEED : Number = 12;
 		
 		[Embed(source="../content/sprites/pragma_smal.png")]
 		protected var PragmaImage: Class;

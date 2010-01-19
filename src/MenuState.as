@@ -11,7 +11,7 @@ package
 			t.size = 16;
 			t.alignment = "center";
 			add(t);
-			t = new FlxText(FlxG.width/2-50,FlxG.height-20,100,"click to play");
+			t = new FlxText(FlxG.width/2-50,FlxG.height-20,100,"(click to play)");
 			t.alignment = "center";
 			add(t);
 		}

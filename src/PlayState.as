@@ -38,6 +38,8 @@ package
 			
 			var pragma : PragmaSprite = new PragmaSprite(50, 50);
 			var hose : Hose = new Hose(pragma);
+			
+			FlxG.follow(pragma);
 		
 			add(dynamicLayer);
 			add(new Rain());
@@ -61,7 +63,8 @@ package
 		override public function postProcess():void 
 		{
 			super.postProcess();
-			screen.draw(lighting, 0, 0);
+			
+			screen.draw(lighting, FlxG.scroll.x, FlxG.scroll.y);
 		}
 		
 	}

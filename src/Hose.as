@@ -45,7 +45,7 @@
 			_points[_points.length - 1] = new Point(_pragma.x + mnx, _pragma.y-OFFSET_Y + mny);
 			_points[_points.length - 2] = new Point(_pragma.x, _pragma.y-OFFSET_Y);
 			
-			for (var i:int = 1; i < _points.length - 1; i++) 
+			for (var i:int = 0; i < _points.length - 1; i++) 
 			{
 				var p1 : Point = Point(_points[i]);
 				var p2 : Point = Point(_points[i + 1]);
@@ -87,10 +87,18 @@
 		private function draw_line(x1 : Number, y1 : Number, x2 : Number, y2 : Number) : void
 		{
 			var line : Shape = new Shape();
+			var ox:Number = 0;
+			var oy:Number = 0;
+			
+			if (FlxG.followTarget)
+			{
+				ox = FlxG.scroll.x;
+				oy = FlxG.scroll.y;
+			}
             
 			line.graphics.lineStyle(1, 0x00AA11);
-            line.graphics.moveTo(x1, y1);
-            line.graphics.lineTo(x2, y2);
+            line.graphics.moveTo(x1+ox, y1+oy);
+            line.graphics.lineTo(x2+ox, y2+oy);
 			
             FlxG.buffer.draw(line);
 		}

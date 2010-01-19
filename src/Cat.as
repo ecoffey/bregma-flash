@@ -20,13 +20,13 @@
 		public function Cat(x:Number, y:Number)
 		{
 			super(x, y,  null);
-			this.loadGraphic(CatImage, true, false, 12, 16, false);
-			this.addAnimation("walk-up", [1, 0, 1, 2], 6, true); 
-			this.addAnimation("walk-right", [4, 3, 4, 5], 6, true);
-			this.addAnimation("walk-down", [7, 6, 7, 8], 6, true);
-			this.addAnimation("walk-left", [10, 9, 10, 11], 6, true);
-			this.offset.x = 12;
-			this.offset.y = 16;
+			this.loadGraphic(CatImage, true, true, 12, 12, false);
+			this.addAnimation("walk-up", [7, 6, 7, 8], 6, true); 
+			this.addAnimation("walk-right", [1, 0, 1, 2], 6, true);
+			this.addAnimation("walk-down", [4, 3, 4, 5], 6, true);
+			this.addAnimation("walk-left", [1, 0, 1, 2], 6, true);
+			this.offset.x = 6;
+			this.offset.y = 12;
 			this.specificFrame(7);
 		}
 		
@@ -44,11 +44,13 @@
 				var i : int = int(Math.random() * 4);
 				if (i == 0)
 				{
+					facing = FlxSprite.LEFT;
 					velocity.x = -20;
 					this.play("walk-left");
 				}
 				else if (i == 1)
 				{
+					facing = FlxSprite.RIGHT;
 					velocity.x = 20;
 					this.play("walk-right");
 				}
@@ -56,17 +58,19 @@
 				{
 					velocity.y = 20;
 					this.play("walk-down");
+					facing = FlxSprite.DOWN;
 				}
 				else
 				{
 					velocity.y = -20;
 					this.play("walk-up");
+					facing = FlxSprite.UP;
 				}
 			}
 			if (walkCountdown < 0)
 			{
 				velocity = new Point(0, 0);
-				this.specificFrame(7);
+				this.specificFrame(4);
 			}
 			
 			

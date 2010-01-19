@@ -1,5 +1,6 @@
 ﻿package  
 {
+	import adobe.utils.CustomActions;
 	import org.flixel.*;
 	
 	public class Caption extends FlxCore
@@ -33,6 +34,7 @@
 		{
 			return _state;
 		}
+		
 		
 		override public function update() : void 
 		{

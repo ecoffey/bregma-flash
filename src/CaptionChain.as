@@ -23,6 +23,14 @@
 			return _state;
 		}
 		
+		public function skip() : void
+		{
+			
+			_captions[_currentCaption].active = false;
+			_captions[_currentCaption].visible = false;
+			_currentCaption += 1;
+		}
+		
 		override public function update() : void 
 		{
 			super.update();

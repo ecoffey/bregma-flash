@@ -6,7 +6,7 @@
 	
 	import Math;
 	
-	public class Hose extends FlxCore
+	public class Hose extends Character
 	{	
 		private var _node_distance : Number = 5;
 		private var _start_x : Number = -500;
@@ -15,7 +15,7 @@
 		private var _pragma : PragmaSprite;
 		private var _points : Array;
 		
-		public const OFFSET_Y : Number = 8;
+		public const OFFSET_Y : Number = -2;
 		
 		public function Hose(pragma : PragmaSprite) 
 		{
@@ -33,8 +33,8 @@
 			var mx : Number = FlxG.mouse.x;
 			var my : Number = FlxG.mouse.y;
 			
-			var mdx : Number = mx - _pragma.x;
-			var mdy : Number = my - _pragma.y-OFFSET_Y;
+			var mdx : Number = mx - _pragma.center.x;
+			var mdy : Number = my - _pragma.center.y-OFFSET_Y;
 			
 			var d : Number = Math.sqrt(Math.pow(mdx, 2) + Math.pow(mdy, 2));
 			
@@ -42,8 +42,8 @@
 			var mny : Number = (mdy / d) * _node_distance;
 			
 			_points[0] = new Point(_start_x, _start_y);
-			_points[_points.length - 1] = new Point(_pragma.x + mnx, _pragma.y-OFFSET_Y + mny);
-			_points[_points.length - 2] = new Point(_pragma.x, _pragma.y-OFFSET_Y);
+			_points[_points.length - 1] = new Point(_pragma.center.x + mnx, _pragma.center.y-OFFSET_Y + mny);
+			_points[_points.length - 2] = new Point(_pragma.center.x, _pragma.center.y-OFFSET_Y);
 			
 			for (var i:int = 0; i < _points.length - 1; i++) 
 			{

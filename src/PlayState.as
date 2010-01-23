@@ -10,7 +10,9 @@ package
 		[Embed(source = "../content/level0/sheet.png", mimeType = "image/png")] public static var data_tiles:Class;*/
 		
 		[Embed(source = "../content/level1/level1.txt", mimeType = "application/octet-stream")] public static var data_map:Class;
+		[Embed(source = "../content/level1/collision.txt", mimeType = "application/octet-stream")] public static var collision_map:Class;
 		[Embed(source = "../content/level1/sheet.png", mimeType = "image/png")] public static var data_tiles:Class;
+		[Embed(source = "../content/level1/collision.png", mimeType = "image/png")] public static var collision_tiles:Class;
 		
 		
 		[Embed(source = "../content/level1/lighting.png", mimeType = "image/png")] public static var lighting_image:Class;
@@ -18,8 +20,9 @@ package
 		
 		public var dynamicLayer:FlxLayer = new FlxLayer();
 		public var lighting:FlxSprite;
-		
+		public var collisionMap:FlxTilemap;
 		public var rain:Array;
+		public var pragma : PragmaSprite;
 		
 		public function PlayState()
 		{
@@ -27,14 +30,18 @@ package
 			myMap.loadMap(new data_map, data_tiles, 16, 16);
 			add(myMap);
 			
-			FlxG.followBounds(0, 0, myMap.width, myMap.height);
-						
+			collisionMap = new FlxTilemap();
+			collisionMap.loadMap(new collision_map, collision_tiles, 16, 16);
+			add(collisionMap);
+			
+			FlxG.followBounds(0, 0, myMap.width-16, myMap.height-16);
+			
 			rain = new Array();
 			
 			lighting = new FlxSprite(0, 0, lighting_image);
 			lighting.blend = "multiply";
 			
-			var pragma : PragmaSprite = new PragmaSprite(200, 200);
+			pragma = new PragmaSprite(0, 0);
 			var hose : Hose = new Hose(pragma);
 			
 			FlxG.follow(pragma);
@@ -55,7 +62,8 @@ package
 		override public function update():void 
 		{
 			super.update();
-			dynamicLayer.children().sortOn("y");
+			collisionMap.collide(pragma);
+			dynamicLayer.children().sortOn("foot_y");
 		}
 		
 		override public function postProcess():void 

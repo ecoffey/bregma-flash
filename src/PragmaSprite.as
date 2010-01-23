@@ -5,7 +5,7 @@
 	
 	import Math;
 	
-	public class PragmaSprite extends FlxSprite
+	public class PragmaSprite extends Character
 	{	
 		protected static var SPEED : Number = 60;
 		protected static var ANIMATION_SPEED : Number = 12;
@@ -16,9 +16,6 @@
 		public function PragmaSprite(x : Number, y : Number) 
 		{
 			super(x, y, null);
-			
-			offset.x = 8;
-			offset.y = 16;
 			
 			loadGraphic(PragmaImage, true, false, 16, 16, false);
 			
@@ -32,6 +29,7 @@
 			addAnimation("idle-down", [7], 1, false);
 			addAnimation("idle-left", [10], 1, false);
 		}	
+		
 		
 		override public function update():void 
 		{

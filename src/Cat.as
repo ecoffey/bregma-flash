@@ -7,7 +7,7 @@
 	 * ...
 	 * @author Ian
 	 */
-	public class Cat extends FlxSprite
+	public class Cat extends Character
 	{
 		[Embed(source="../content/sprites/cat.png", mimeType="image/png")]
 		public static var CatImage:Class;
@@ -25,10 +25,9 @@
 			this.addAnimation("walk-right", [1, 0, 1, 2], 6, true);
 			this.addAnimation("walk-down", [4, 3, 4, 5], 6, true);
 			this.addAnimation("walk-left", [1, 0, 1, 2], 6, true);
-			this.offset.x = 6;
-			this.offset.y = 12;
 			this.specificFrame(7);
 		}
+		
 		
 		public override function update() : void
 		{

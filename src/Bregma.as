@@ -13,6 +13,7 @@
 			this.showLogo = false;
 			this.useDefaultHotKeys = true;
 		}
+		
 	}
 
 }

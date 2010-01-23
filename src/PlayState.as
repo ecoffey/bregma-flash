@@ -32,6 +32,7 @@ package
 			
 			collisionMap = new FlxTilemap();
 			collisionMap.loadMap(new collision_map, collision_tiles, 16, 16);
+			collisionMap.visible = false;
 			add(collisionMap);
 			
 			FlxG.followBounds(0, 0, myMap.width-16, myMap.height-16);
@@ -62,7 +63,7 @@ package
 		override public function update():void 
 		{
 			super.update();
-			collisionMap.collide(pragma);
+			collisionMap.collideArray(dynamicLayer.children())
 			dynamicLayer.children().sortOn("foot_y");
 		}
 		

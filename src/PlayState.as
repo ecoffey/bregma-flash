@@ -26,17 +26,15 @@ package
 			var myMap : FlxTilemap = new FlxTilemap();
 			myMap.loadMap(new data_map, data_tiles, 16, 16);
 			add(myMap);
-			//var myMap2 : FlxTilemap = new FlxTilemap();
-			//myMap2.loadMap(new data_map2, data_tiles, 20, 20);
-			//add(myMap2);
+			
+			FlxG.followBounds(0, 0, myMap.width, myMap.height);
 						
 			rain = new Array();
-			
 			
 			lighting = new FlxSprite(0, 0, lighting_image);
 			lighting.blend = "multiply";
 			
-			var pragma : PragmaSprite = new PragmaSprite(50, 50);
+			var pragma : PragmaSprite = new PragmaSprite(200, 200);
 			var hose : Hose = new Hose(pragma);
 			
 			FlxG.follow(pragma);

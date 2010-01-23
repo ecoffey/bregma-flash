@@ -22,6 +22,10 @@
 		{
 			x = Math.random() * FlxG.width;
 			y = Math.random() * FlxG.height;
+			
+			x -= FlxG.scroll.x ;
+			y -= FlxG.scroll.y ;
+			
 			life = Math.random();
 			initial_life = life;
 		}

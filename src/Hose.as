@@ -1,5 +1,6 @@
 ﻿package  
 {
+	import adobe.utils.CustomActions;
 	import flash.display.Shape;
 	import flash.geom.Point;
 	import org.flixel.*;
@@ -8,6 +9,9 @@
 	
 	public class Hose extends Character
 	{	
+		
+		[Embed(source = "../content/sprites/rain.png", mimeType = "image/png")] public static var PARTICLE_IMAGE:Class;
+		
 		private var _node_distance : Number = 5;
 		private var _start_x : Number = -500;
 		private var _start_y : Number = 150;
@@ -15,7 +19,7 @@
 		private var _pragma : PragmaSprite;
 		private var _points : Array;
 		
-		private var _particles : FlxEmitter = new FlxEmitter();
+		private var _particles : FlxEmitter = new FlxEmitter(0, 0, 0.1);
 		
 		public const OFFSET_Y : Number = -2;
 		
@@ -28,12 +32,13 @@
 			{
 				_points.push(new Point(i, _start_y));
 			}
+			_particles.createSprites(PARTICLE_IMAGE, 200, true);
 		}
 		
 		override public function update() : void 
 		{
-			var mx : Number = FlxG.mouse.x;
-			var my : Number = FlxG.mouse.y;
+			var mx : Number = FlxG.mouse.x// - FlxG.scroll.x;
+			var my : Number = FlxG.mouse.y //- FlxG.scroll.y;
 			
 			var mdx : Number = mx - _pragma.center.x;
 			var mdy : Number = my - _pragma.center.y-OFFSET_Y;
@@ -67,7 +72,25 @@
 				_points[i] = new Point(p1.x + nx * correction, p1.y + ny * correction);
 			}
 			
+			_particles.x = _points[_points.length - 1].x;
+			_particles.y = _points[_points.length - 1].y;
+			_particles.gravity = 1;
+			_particles.setSize(2, 2);
+			_particles.setXVelocity(mnx * 10, mnx * 100);
+			_particles.setYVelocity(mny * 10, mny * 100);
+			
+			if (FlxG.mouse.pressed())
+			{
+				spray();
+			}
+			
 			super.update();
+		}
+		
+		public function spray():void
+		{
+			_particles.emit();
+		
 		}
 		
 		override public function render() : void 
@@ -83,7 +106,6 @@
 				prev = point;
 			}
 			
-			super.render();
 		}
 		
 		private function draw_line(x1 : Number, y1 : Number, x2 : Number, y2 : Number) : void

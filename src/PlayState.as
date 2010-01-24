@@ -52,9 +52,9 @@ package
 			dynamicLayer.add(pragma);
 			dynamicLayer.add(hose);
 			
-			for (var i:int = 0; i < 5; i++)
+			for (var i:int = 0; i < 20; i++)
 			{
-				dynamicLayer.add(new Cat(FlxG.width * Math.random(), FlxG.height * Math.random()));
+				dynamicLayer.add(new Cat(200 * Math.random()+209, 160 * Math.random() + 160));
 			}
 			
 			FlxG.showCursor(Bregma.Cursor);

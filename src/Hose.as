@@ -15,6 +15,8 @@
 		private var _pragma : PragmaSprite;
 		private var _points : Array;
 		
+		private var _particles : FlxEmitter = new FlxEmitter();
+		
 		public const OFFSET_Y : Number = -2;
 		
 		public function Hose(pragma : PragmaSprite) 

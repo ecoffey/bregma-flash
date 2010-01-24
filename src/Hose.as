@@ -11,28 +11,42 @@
 	{	
 		
 		[Embed(source = "../content/sprites/rain.png", mimeType = "image/png")] public static var PARTICLE_IMAGE:Class;
+		[Embed(source = "../content/sounds/hose_w.mp3", mimeType = "audio/mpeg")] public static var HOSE_SOUND:Class;
 		
 		private var _node_distance : Number = 5;
-		private var _start_x : Number = -500;
-		private var _start_y : Number = 150;
+		private var _start_x : Number = 0;
+		private var _start_y : Number = 275;
 		
 		private var _pragma : PragmaSprite;
 		private var _points : Array;
 		
 		private var _particles : FlxEmitter = new FlxEmitter(0, 0, 0.1);
 		
+		private var _sound : FlxSound;
+		private var _spraying : Boolean = false;
+		
 		public const OFFSET_Y : Number = -2;
 		
-		public function Hose(pragma : PragmaSprite) 
+		public function Hose(pragma : PragmaSprite, layer:FlxLayer) 
 		{
 			_pragma = pragma;
 			
 			_points = new Array();
-			for (var i:int = _start_x; i <100; i += _node_distance) 
+			for (var i:int = _start_x; i <pragma.x; i += _node_distance) 
 			{
 				_points.push(new Point(i, _start_y));
 			}
-			_particles.createSprites(PARTICLE_IMAGE, 200, true);
+			
+			//_particles.createSprites(PARTICLE_IMAGE, 200, true);
+			var sprites:Array = new Array();
+			for (var j:int = 0; j < 200; j++)
+			{
+				var p:FlxSprite = new WaterParticle(this);
+				layer.add(p);
+				sprites.push(p);
+			}
+			trace(sprites);
+			_particles.loadSprites(sprites);
 		}
 		
 		override public function update() : void 
@@ -75,16 +89,31 @@
 			_particles.x = _points[_points.length - 1].x;
 			_particles.y = _points[_points.length - 1].y;
 			_particles.gravity = 1;
+			_particles.delay = 0.05;
 			_particles.setSize(2, 2);
-			_particles.setXVelocity(mnx * 10, mnx * 100);
-			_particles.setYVelocity(mny * 10, mny * 100);
+			_particles.setXVelocity(mnx * 40, mnx * 50);
+			_particles.setYVelocity(mny * 40, mny * 50);
 			
 			if (FlxG.mouse.pressed())
 			{
 				spray();
+				_pragma.knockBack = new Point( -mnx * 10, -mny * 10);
+				if(this._sound == null)
+					this._sound = FlxG.play(HOSE_SOUND, 0.5, true);
+			}
+			else
+			{
+				if (this._sound != null)
+					this._sound.stop();
+				this._sound = null;
 			}
 			
 			super.update();
+		}
+		
+		public function get tip():Point
+		{
+			return _points[_points.length - 1];
 		}
 		
 		public function spray():void

@@ -13,11 +13,13 @@
 		[Embed(source="../content/sprites/pragma_smal.png")]
 		protected var PragmaImage: Class;
 		
+		public var knockBack:Point = new Point();
+		
 		public function PragmaSprite(x : Number, y : Number) 
 		{
 			super(x, y, null);
 			
-			loadGraphic(PragmaImage, true, false, 16, 16, false);
+			loadGraphic(PragmaImage, true, false, 12, 16, false);
 			
 			addAnimation("walk-up", [1, 0, 1, 2], ANIMATION_SPEED, true); 
 			addAnimation("walk-right", [4, 3, 4, 5], ANIMATION_SPEED, true);
@@ -36,7 +38,7 @@
 			var action : String = "idle";
 			var direction : String = look_direction();
 			
-			velocity = new Point(0, 0);
+			velocity = new Point(0, 0).add(knockBack);
 			
 			if (FlxG.keys.pressed('W')) {
 				velocity.y -= SPEED;
@@ -55,8 +57,26 @@
 				action = "walk";
 			}
 			
-			play(action + "-" + direction);
+			if (FlxG.keys.justPressed('X')) {
+				trace(x, y)
+				var choice:int = Math.random() * 4;
+				if (choice == 0)
+					FlxG.play(Sounds.BREGMA_CALL_1);
+				else if (choice == 1)
+					FlxG.play(Sounds.BREGMA_CALL_2);
+				else if (choice == 2)
+					FlxG.play(Sounds.BREGMA_CALL_3);
+				else if (choice == 3)
+					FlxG.play(Sounds.BREGMA_CALL_4);
+			}
 			
+			if (FlxG.keys.justPressed('Z')) {
+				FlxG.play(Sounds.BREGMA_SONG);
+
+			}
+			
+			play(action + "-" + direction);
+			knockBack = new Point(0, 0);
 			super.update();
 		}
 		

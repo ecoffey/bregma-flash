@@ -7,43 +7,48 @@
 	 */
 	public class WaterParticle extends FlxSprite
 	{
-		[Embed(source = "../content/sprites/rain.png", mimeType = "image/png")] public static var WATER_IMAGE:Class;
-		public var life:Number = 0; 
+		public var fade:Number = 0; 
 		public var initial_life:Number = 0;
 		private var hose : Hose;
 		
 		public function WaterParticle(hose:Hose) 
 		{
-			super(hose.x, hose.y, WATER_IMAGE); 
-			remake();
+			super(hose.tip.x, hose.tip.y, null); 
+			this.hose = hose;
+			this.loadGraphic(Hose.PARTICLE_IMAGE, true);
+			this.randomFrame();
+			//remake();
 		}
 		
-		override public function reset(X:Number, Y:Number):void 
+		override public function onEmit():void 
 		{
-			super.reset(hose.x, hose.y);
+			super.onEmit();
+			//this.x = hose.tip.x;
+			//this.y = hose.tip.y;
 			remake();
 		}
 		
 		public function remake ():void 
-		{
-			this.active = true;
+		{	
+			fade = Math.random()*1;
+			initial_life = fade;
 			this.visible = true;
-			
-			life = Math.random();
-			initial_life = life;
+			this.active = true;
+			this.dead = false;
 		}
 		
 		override public function update():void 
 		{
 			super.update();
-			this.alpha = (life / initial_life);
-			this.life -= FlxG.elapsed;
+			this.alpha = (fade / initial_life);
+			this.fade -= FlxG.elapsed;
 			
-			if (this.life <= 0)
+			if (this.fade <= 0)
 			{
-				this.active = false;
+				this.fade = 0;
 				this.visible = false;
-				
+				this.active  = false;
+				this.dead = true;
 			}
 		}
 		

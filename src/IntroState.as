@@ -10,8 +10,8 @@
 		{
 			_captionChain = new CaptionChain([
 				new Caption("\"Bregma\"", FlxG.width/2-25, FlxG.height/2-10, 1.0, 1.5, 1.0),
-				new Caption("A Tragedy in Four Acts", FlxG.width / 2 - 60,  FlxG.height / 2 - 10, 1.0, 1.5, 1.0),
-				new Caption("Act One: Fall", FlxG.width/2-40,  FlxG.height/2 - 10, 1.0, 1.5, 1.0)
+				new Caption("Where are you Bregma?", FlxG.width / 2 - 60,  FlxG.height / 2 - 10, 1.0, 1.5, 1.0),
+				new Caption("Act One: Spring", FlxG.width/2-40,  FlxG.height/2 - 10, 1.0, 1.5, 1.0)
 			]);
 			
 			add(_captionChain);

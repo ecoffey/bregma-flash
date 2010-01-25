@@ -28,6 +28,8 @@ package
 		public var cats:Array = new Array();
 		public var rain:Rain;
 		
+		public var _kid : Kid;
+		
 		private var fadeIn:Number = 0;
 		
 		public function PlayState()
@@ -72,15 +74,19 @@ package
 			
 			addCats(270, 97, 300, 200, 12);
 			
-	
+			_kid = new Kid(290, 200, new RandomPathing());
+			add(_kid);
+			
 			FlxG.showCursor(Bregma.Cursor);
 		}
 		
 		public function addCats(startx:Number, starty:Number, width:Number, height:Number, count:int) : void
 		{
+			var pathing : IBehavior = new RandomPathing();
+			
 			for (var i:int = 0; i < count; i++)
 			{
-				var c:Cat = new Cat(width * Math.random()+startx, height * Math.random() + starty);
+				var c:Cat = new Cat(width * Math.random()+startx, height * Math.random() + starty, new RandomPathing());
 				cats.push(c);
 				dynamicLayer.add(c);
 			}
@@ -106,6 +112,8 @@ package
 				add(new FlxText(0, 0, 200, "BREGMA"));
 
 			dynamicLayer.children().sortOn("foot_y");
+			
+			_kid.update();
 		}
 		
 		override public function postProcess():void 

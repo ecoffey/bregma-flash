@@ -62,7 +62,6 @@
 			var mnx : Number = (mdx / d) * _node_distance;
 			var mny : Number = (mdy / d) * _node_distance;
 			
-			_points[0] = new Point(_start_x, _start_y);
 			_points[_points.length - 1] = new Point(_pragma.center.x + mnx, _pragma.center.y-OFFSET_Y + mny);
 			_points[_points.length - 2] = new Point(_pragma.center.x, _pragma.center.y-OFFSET_Y);
 			
